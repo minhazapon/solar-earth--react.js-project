@@ -6,7 +6,7 @@ const Footer = () => {
         <div>
            
 
-           <div className=" flex-col md:flex-row lg:flex-row bg-cyan-400 p-10 flex justify-center items-center gap-20">
+           <div className=" flex-col md:flex-row lg:flex-row bg-gradient-to-r from-teal-400 to-blue-500 p-10 flex justify-center items-center gap-20">
 
 
 

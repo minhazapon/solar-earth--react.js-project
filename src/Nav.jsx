@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { fireContext } from "./firebase/AuthContext";
 
 
 
 
 const Nav = () => {
+
+    const {user, logOut} = useContext(fireContext)
 
     const navs = <>
     
@@ -11,12 +15,18 @@ const Nav = () => {
          <li><NavLink to="/" >Home</NavLink></li>
          <li><NavLink to="/system" >Solar System</NavLink></li>
          <li><NavLink to="/info" >Solar Info</NavLink></li>
-    
-    
-    
-    
-    
+  
     </>
+
+
+        const handleOut = () => {
+        logOut()
+        .then(() => console.log('logOut successfully'))
+        .catch( error => 
+          console.error(error)
+        )
+      
+        } 
 
 
 
@@ -27,7 +37,7 @@ const Nav = () => {
 
             <div>
 
-            <div className="navbar bg-base-100  shadow-lg ">
+            <div className="navbar bg-gradient-to-r from-teal-400 to-blue-500  shadow-lg ">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,8 +62,11 @@ const Nav = () => {
     </div>
 
     <div className=" flex items-center gap-2">
-     <img className=" h-[50px]" src="https://i.ibb.co/gT7WH5S/energy.png" alt="" />
-     <a className="  text-cyan-500 font-semibold  text-2xl">Solar Earth</a>
+      <div className=" bg-white p-3 rounded-xl">
+      <img className=" h-[50px]" src="https://i.ibb.co/gT7WH5S/energy.png" alt="" />
+      </div>
+    
+     <a className="  text-blue-900 font-semibold  text-2xl">Solar Earth</a>
 
     </div>
     
@@ -64,7 +77,21 @@ const Nav = () => {
     </ul>
   </div>
   <div className="navbar-end">
+
+
+  { user ? <>
+    
+    <button onClick={handleOut} className=" btn">SignOut</button>
+  </>:
+
+    <Link to="/in" >
     <a className="btn">Sign In</a>
+    </Link> 
+
+  }
+
+    
+    
   </div>
 </div>
 

@@ -10,6 +10,10 @@ import Root from './Root';
 import Home from './Home';
 import Solar from './Solar';
 import Information from './Information';
+import Login from './firebase/Login';
+import SignUp from './firebase/SignUp';
+import AuthContext from './firebase/AuthContext';
+import PrivateRoute from './PrivateRoute';
 
 
 const router = createBrowserRouter([
@@ -23,11 +27,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/system",
-        element:  <Solar></Solar>,
+        element:   <PrivateRoute><Solar></Solar></PrivateRoute> ,
       },
       {
         path: "/info",
-        element:   <Information></Information>,
+        element:   <PrivateRoute><Information></Information></PrivateRoute> ,
+      },
+      {
+        path: "/in",
+        element:  <Login></Login> ,
+      },
+      {
+        path: "/up",
+        element:   <SignUp></SignUp> ,
       },
     ],
   },
@@ -35,6 +47,13 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+
+     <AuthContext>
+         
+     <RouterProvider router={router} />
+
+     </AuthContext>
+
+      
   </React.StrictMode>,
 )
